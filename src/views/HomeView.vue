@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import { cn } from '@/lib/utils'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <main :class="cn('text-red-500')">Hello</main>
 </template>
