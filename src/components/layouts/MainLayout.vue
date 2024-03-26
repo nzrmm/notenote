@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Header, Footer } from '@/components'
+import { Header, Footer } from '@/components/layouts'
 </script>
 
 <template>
