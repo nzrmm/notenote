@@ -1,17 +1,16 @@
 <script setup lang="ts">
+import type { NoteType } from '@/types/note'
+
 interface Props {
-  data: {
-    title: string
-    date: string
-  }
+  data: NoteType
 }
 
-const props = defineProps<Props>()
+const { data } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="bg-slate-900/20 rounded-lg p-4 break-inside-avoid cursor-pointer">
-    <h6 class="mb-4">{{ props.data.title }}</h6>
-    <time :dateTime="props.data.date">{{ props.data.date }}</time>
+  <div class="bg-slate-900/10 rounded-lg p-4 break-inside-avoid cursor-pointer">
+    <h6 class="mb-4">{{ data.title }}</h6>
+    <time :dateTime="data.date">{{ data.date }}</time>
   </div>
 </template>

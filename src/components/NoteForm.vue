@@ -12,10 +12,14 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 
 import { cn } from '@/lib/utils'
+import { useNoteStore } from '@/stores/note'
+
+const noteStore = useNoteStore()
+const { createNote, setCloseCreateModal } = noteStore
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z.string().min(1).max(20),
+    title: z.string().min(1).max(50),
     date: z.date()
   })
 )
@@ -25,7 +29,12 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit((values) => {
-  console.log('FormSubmitted', values)
+  createNote({
+    title: values.title,
+    date: format(values.date, 'PPP')
+  })
+
+  setCloseCreateModal()
 })
 </script>
 

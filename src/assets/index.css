@@ -107,3 +107,9 @@
     @apply lg:text-lg font-medium;
   }
 }
+
+@layer utilities {
+  .content-container {
+    @apply h-[calc(100vh_-_93px)];
+  }
+}
