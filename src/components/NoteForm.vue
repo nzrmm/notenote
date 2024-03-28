@@ -7,9 +7,18 @@ import { Calendar as CalendarIcon } from 'lucide-vue-next'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import {
+  Select,
+  SelectItem,
+  SelectValue,
+  SelectGroup,
+  SelectContent,
+  SelectTrigger
+} from '@/components/ui/select'
 
 import { cn } from '@/lib/utils'
 import { useNoteStore } from '@/stores/note'
@@ -19,8 +28,10 @@ const { createNote, setCloseFormModal } = noteStore
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z.string().min(1).max(50),
-    date: z.date()
+    title: z.string().min(1, { message: 'Title must be filled!' }).max(50),
+    description: z.string().min(1, { message: 'Description must be filled!' }),
+    date: z.date(),
+    color: z.string().min(1)
   })
 )
 
@@ -30,7 +41,7 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit((values) => {
   createNote({
-    title: values.title,
+    ...values,
     date: format(values.date, 'PPP')
   })
 
@@ -43,7 +54,7 @@ const onSubmit = form.handleSubmit((values) => {
     <div class="grid gap-4 mb-4">
       <FormField v-slot="{ componentField }" name="title">
         <FormItem>
-          <FormLabel>Title</FormLabel>
+          <FormLabel class="text-slate-700">Title</FormLabel>
 
           <FormControl>
             <Input type="text" placeholder="Create title..." v-bind="componentField" />
@@ -52,9 +63,20 @@ const onSubmit = form.handleSubmit((values) => {
         </FormItem>
       </FormField>
 
+      <FormField v-slot="{ componentField }" name="description">
+        <FormItem>
+          <FormLabel class="text-slate-700">Description</FormLabel>
+
+          <FormControl>
+            <Textarea placeholder="Create description..." v-bind="componentField" />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+
       <FormField v-slot="{ componentField, value }" name="date">
         <FormItem>
-          <FormLabel>Date</FormLabel>
+          <FormLabel class="text-slate-700">Date</FormLabel>
 
           <Popover>
             <PopoverTrigger as-child>
@@ -73,6 +95,30 @@ const onSubmit = form.handleSubmit((values) => {
               <Calendar v-bind="componentField" />
             </PopoverContent>
           </Popover>
+          <FormMessage />
+        </FormItem>
+      </FormField>
+
+      <FormField v-slot="{ componentField }" name="color">
+        <FormItem>
+          <FormLabel class="text-slate-700">Select Color</FormLabel>
+
+          <Select v-bind="componentField">
+            <FormControl>
+              <SelectTrigger>
+                <SelectValue placeholder="Select color" />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="bg-emerald-500">Emerald</SelectItem>
+                <SelectItem value="bg-orange-500">Orange</SelectItem>
+                <SelectItem value="bg-pink-500">Pink</SelectItem>
+                <SelectItem value="bg-amber-500">Amber</SelectItem>
+                <SelectItem value="bg-lime-500">Lime</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
           <FormMessage />
         </FormItem>
       </FormField>
