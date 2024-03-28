@@ -20,8 +20,10 @@ const { isOpenFormModal } = storeToRefs(noteStore)
 </script>
 
 <template>
-  <footer class="fixed bottom-0 inset-x-0 py-4">
-    <div class="flex justify-end w-[88%] mx-auto lg:max-w-4xl">
+  <aside class="w-20 sm:w-24 md:w-28 sticky top-0 h-screen border-r shadow-sm py-6">
+    <div class="grid place-items-center">
+      <p class="font-bold mb-20">Note2</p>
+
       <Dialog :open="isOpenFormModal" @update:open="(open) => (isOpenFormModal = open)">
         <DialogTrigger as-child>
           <Button size="icon">
@@ -41,6 +43,5 @@ const { isOpenFormModal } = storeToRefs(noteStore)
         </DialogContent>
       </Dialog>
     </div>
-  </footer>
+  </aside>
 </template>
-Sistem

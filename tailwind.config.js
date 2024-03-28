@@ -23,6 +23,9 @@ module.exports = {
       sans: ['Space Grotesk', 'sans-serif']
     },
     extend: {
+      screens: {
+        '2xl': '1536px'
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

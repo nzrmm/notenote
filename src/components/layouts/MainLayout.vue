@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { Header, Footer } from '@/components/layouts'
+import { Header, Sidebar } from '@/components/layouts'
 </script>
 
 <template>
-  <main class="antialiased w-[88%] lg:max-w-4xl min-h-screen mx-auto">
-    <Header />
-    <slot></slot>
-    <Footer />
+  <main class="antialiased min-h-screen">
+    <div class="flex">
+      <Sidebar />
+
+      <div class="flex-1 content-container">
+        <Header />
+        <slot></slot>
+      </div>
+    </div>
   </main>
 </template>

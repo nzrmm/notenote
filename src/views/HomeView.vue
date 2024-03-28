@@ -16,7 +16,13 @@ const { notes } = storeToRefs(noteStore)
     </div>
   </div>
 
-  <div v-else class="grid sm:grid-cols-4 gap-4">
-    <NoteCard v-for="note in notes" :key="note.date" :data="note" />
+  <div v-else>
+    <h1 class="mb-16">Notes</h1>
+
+    <div
+      class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4"
+    >
+      <NoteCard v-for="note in notes" :key="note.date" :data="note" />
+    </div>
   </div>
 </template>
