@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/select'
 
 import { cn } from '@/lib/utils'
+import { NOTE_COLOR } from '@/lib/constants'
 import { useNoteStore } from '@/stores/note'
 
 const noteStore = useNoteStore()
@@ -111,11 +112,16 @@ const onSubmit = form.handleSubmit((values) => {
             </FormControl>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value="bg-emerald-500">Emerald</SelectItem>
-                <SelectItem value="bg-orange-500">Orange</SelectItem>
-                <SelectItem value="bg-pink-500">Pink</SelectItem>
-                <SelectItem value="bg-amber-500">Amber</SelectItem>
-                <SelectItem value="bg-lime-500">Lime</SelectItem>
+                <SelectItem
+                  v-for="noteColor in NOTE_COLOR"
+                  :key="noteColor.name"
+                  :value="noteColor.color"
+                >
+                  <div class="flex items-center justify-between gap-2">
+                    <span>{{ noteColor.name }}</span>
+                    <div :class="cn('w-2 h-2 rounded-full', noteColor.color)"></div>
+                  </div>
+                </SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
