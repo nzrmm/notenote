@@ -10,7 +10,7 @@ const { data } = defineProps<Props>()
 </script>
 
 <template>
-  <div :class="cn('h-56 flex flex-col justify-between rounded-lg p-4 cursor-pointer', data.color)">
+  <div :class="cn('h-56 flex flex-col justify-between rounded-lg p-4', data.color)">
     <p>{{ data.note }}</p>
     <time :dateTime="data.date">{{ data.date }}</time>
   </div>

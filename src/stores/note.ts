@@ -7,15 +7,23 @@ export const useNoteStore = defineStore('note', {
   state: (): NoteStateType => {
     return {
       notes: useLocalStorage('notes', []),
-      isOpenFormModal: false
+      noteFormModal: {
+        isOpen: false,
+        color: ''
+      },
+      isViewSelectColor: false
     }
   },
   actions: {
     createNote(note: NoteType) {
       this.notes.push(note)
     },
-    setCloseFormModal() {
-      this.isOpenFormModal = false
+    setNoteFormModal(color: string, isOpen: boolean) {
+      this.noteFormModal.isOpen = isOpen
+      this.noteFormModal.color = color
+    },
+    setViewSelectColor(value: boolean) {
+      this.isViewSelectColor = value
     }
   }
 })

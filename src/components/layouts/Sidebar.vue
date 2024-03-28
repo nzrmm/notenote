@@ -2,21 +2,16 @@
 import { storeToRefs } from 'pinia'
 import { Plus } from 'lucide-vue-next'
 
-import { NoteForm } from '@/components'
+import { NoteFormModal } from '@/components'
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogTitle,
-  DialogHeader,
-  DialogTrigger,
-  DialogContent,
-  DialogDescription
-} from '@/components/ui/dialog'
 
+import { cn } from '@/lib/utils'
+import { NOTE_COLOR } from '@/lib/constants'
 import { useNoteStore } from '@/stores/note'
 
 const noteStore = useNoteStore()
-const { isOpenFormModal } = storeToRefs(noteStore)
+const { isViewSelectColor } = storeToRefs(noteStore)
+const { setNoteFormModal, setViewSelectColor } = noteStore
 </script>
 
 <template>
@@ -24,24 +19,25 @@ const { isOpenFormModal } = storeToRefs(noteStore)
     <div class="grid place-items-center">
       <p class="font-bold mb-20">Note2</p>
 
-      <Dialog :open="isOpenFormModal" @update:open="(open) => (isOpenFormModal = open)">
-        <DialogTrigger as-child>
-          <Button size="icon">
-            <Plus width="20" />
-          </Button>
-        </DialogTrigger>
+      <Button
+        size="icon"
+        :class="cn('mb-12 transition-all duration-300', { 'rotate-45': isViewSelectColor })"
+        @click="setViewSelectColor(!isViewSelectColor)"
+      >
+        <Plus width="20" />
+      </Button>
 
-        <DialogContent class="w-[88%] sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Create Note</DialogTitle>
-            <DialogDescription>
-              Create your daily note in here. Enjoy your day :)
-            </DialogDescription>
-          </DialogHeader>
+      <div v-show="isViewSelectColor" class="grid gap-6">
+        <Button
+          v-for="noteColor in NOTE_COLOR"
+          size="icon-sm"
+          :key="noteColor.name"
+          :class="noteColor.color"
+          @click="setNoteFormModal(noteColor.color, true)"
+        ></Button>
+      </div>
 
-          <NoteForm />
-        </DialogContent>
-      </Dialog>
+      <NoteFormModal />
     </div>
   </aside>
 </template>
