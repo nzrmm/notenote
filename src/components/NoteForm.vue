@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils'
 import { useNoteStore } from '@/stores/note'
 
 const noteStore = useNoteStore()
-const { createNote, setCloseCreateModal } = noteStore
+const { createNote, setCloseFormModal } = noteStore
 
 const formSchema = toTypedSchema(
   z.object({
@@ -34,7 +34,7 @@ const onSubmit = form.handleSubmit((values) => {
     date: format(values.date, 'PPP')
   })
 
-  setCloseCreateModal()
+  setCloseFormModal()
 })
 </script>
 

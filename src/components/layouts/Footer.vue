@@ -16,13 +16,13 @@ import {
 import { useNoteStore } from '@/stores/note'
 
 const noteStore = useNoteStore()
-const { isOpenCreateModal } = storeToRefs(noteStore)
+const { isOpenFormModal } = storeToRefs(noteStore)
 </script>
 
 <template>
   <footer class="fixed bottom-0 inset-x-0 py-4">
     <div class="flex justify-end w-[88%] mx-auto lg:max-w-4xl">
-      <Dialog :open="isOpenCreateModal" @update:open="(open) => (isOpenCreateModal = open)">
+      <Dialog :open="isOpenFormModal" @update:open="(open) => (isOpenFormModal = open)">
         <DialogTrigger as-child>
           <Button size="icon">
             <Plus width="20" />
@@ -43,3 +43,4 @@ const { isOpenCreateModal } = storeToRefs(noteStore)
     </div>
   </footer>
 </template>
+Sistem
