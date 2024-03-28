@@ -1,8 +1,7 @@
 import type { Ref } from 'vue'
 
 export interface NoteType {
-  title: string
-  description: string
+  note: string
   date: string
   color: string
 }

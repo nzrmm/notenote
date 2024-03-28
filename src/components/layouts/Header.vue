@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 
 <template>
   <header class="flex justify-between items-center py-4 mb-4">
-    <h2>Note2</h2>
+    <h1>Note-note</h1>
 
     <Button>
       <Search width="20" />

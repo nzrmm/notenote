@@ -11,12 +11,12 @@ const { notes } = storeToRefs(noteStore)
 <template>
   <div v-if="!notes.length" class="content-container grid place-items-center">
     <div class="text-center">
-      <h5>No Notes</h5>
+      <p class="font-bold">No Notes</p>
       <span>Click the Add button to create a note.</span>
     </div>
   </div>
 
-  <div v-else class="columns-2 space-y-4">
+  <div v-else class="grid sm:grid-cols-4 gap-4">
     <NoteCard v-for="note in notes" :key="note.date" :data="note" />
   </div>
 </template>

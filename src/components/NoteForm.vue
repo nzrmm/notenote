@@ -29,8 +29,7 @@ const { createNote, setCloseFormModal } = noteStore
 
 const formSchema = toTypedSchema(
   z.object({
-    title: z.string().min(1, { message: 'Title must be filled!' }).max(50),
-    description: z.string().min(1, { message: 'Description must be filled!' }),
+    note: z.string().min(1, { message: 'Description must be filled!' }),
     date: z.date(),
     color: z.string().min(1)
   })
@@ -53,23 +52,12 @@ const onSubmit = form.handleSubmit((values) => {
 <template>
   <form @submit="onSubmit">
     <div class="grid gap-4 mb-4">
-      <FormField v-slot="{ componentField }" name="title">
+      <FormField v-slot="{ componentField }" name="note">
         <FormItem>
-          <FormLabel class="text-slate-700">Title</FormLabel>
+          <FormLabel class="text-slate-700">Note</FormLabel>
 
           <FormControl>
-            <Input type="text" placeholder="Create title..." v-bind="componentField" />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      </FormField>
-
-      <FormField v-slot="{ componentField }" name="description">
-        <FormItem>
-          <FormLabel class="text-slate-700">Description</FormLabel>
-
-          <FormControl>
-            <Textarea placeholder="Create description..." v-bind="componentField" />
+            <Textarea placeholder="Create note..." v-bind="componentField" />
           </FormControl>
           <FormMessage />
         </FormItem>
