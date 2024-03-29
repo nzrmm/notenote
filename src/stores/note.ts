@@ -7,12 +7,10 @@ import type { NoteStateType, NoteType } from '@/types/note'
 export const useNoteStore = defineStore('note', {
   state: (): NoteStateType => {
     return {
-      note: {},
       notes: useLocalStorage('notes', []),
-      noteFormModal: {
-        isOpen: false,
-        color: ''
-      },
+      note: {},
+      color: '',
+      isOpenFormModal: false,
       isViewSelectColor: false
     }
   },
@@ -35,9 +33,11 @@ export const useNoteStore = defineStore('note', {
       const index = this.notes.findIndex((note) => note.id === id)
       this.notes[index].isFavorite = isFavorite
     },
-    setNoteFormModal(color: string, isOpen: boolean) {
-      this.noteFormModal.isOpen = isOpen
-      this.noteFormModal.color = color
+    setOpenFormModal(value: boolean) {
+      this.isOpenFormModal = value
+    },
+    setColor(value: string) {
+      this.color = value
     },
     setViewSelectColor(value: boolean) {
       this.isViewSelectColor = value

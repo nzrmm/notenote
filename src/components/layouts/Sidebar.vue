@@ -6,12 +6,12 @@ import { NoteFormModal } from '@/components'
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
-import { NOTE_COLOR } from '@/lib/constants'
+import { COLORS } from '@/lib/constants'
 import { useNoteStore } from '@/stores/note'
 
 const noteStore = useNoteStore()
 const { isViewSelectColor } = storeToRefs(noteStore)
-const { setNoteFormModal, setViewSelectColor } = noteStore
+const { setColor, setOpenFormModal, setViewSelectColor } = noteStore
 </script>
 
 <template>
@@ -29,11 +29,11 @@ const { setNoteFormModal, setViewSelectColor } = noteStore
 
       <div v-show="isViewSelectColor" class="grid gap-6">
         <Button
-          v-for="noteColor in NOTE_COLOR"
+          v-for="color in COLORS"
           size="icon-sm"
-          :key="noteColor.name"
-          :class="noteColor.color"
-          @click="setNoteFormModal(noteColor.color, true)"
+          :key="color"
+          :class="color"
+          @click="setOpenFormModal(true), setColor(color)"
         ></Button>
       </div>
 

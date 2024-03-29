@@ -22,13 +22,14 @@ import {
 } from '@/components/ui/dialog'
 
 import { cn } from '@/lib/utils'
+import { COLORS } from '@/lib/constants'
 import { useNoteStore } from '@/stores/note'
 
 const route = useRoute()
 const router = useRouter()
 const noteStore = useNoteStore()
-const { note, noteFormModal } = storeToRefs(noteStore)
-const { getNoteById, createNote, editNote, setNoteFormModal } = noteStore
+const { note, color, isOpenFormModal } = storeToRefs(noteStore)
+const { getNoteById, createNote, editNote, setColor, setOpenFormModal } = noteStore
 
 watch(
   () => route.query.id,
@@ -62,25 +63,28 @@ const onSubmit = form.handleSubmit((values) => {
     ? editNote(route.query.id as string, {
         ...note.value,
         ...values,
+        color: color.value,
         date: new Date(values.date).toISOString()
       })
     : createNote({
         ...values,
-        color: noteFormModal.value.color,
+        color: color.value,
         date: new Date(values.date).toISOString()
       })
 
-  setNoteFormModal('', false)
+  setColor('')
+  setOpenFormModal(false)
   router.replace({ query: undefined })
 })
 </script>
 
 <template>
   <Dialog
-    :open="noteFormModal.isOpen"
+    :open="isOpenFormModal"
     @update:open="
       (open) => {
-        setNoteFormModal('', open)
+        setColor('')
+        setOpenFormModal(open)
         router.replace({ query: undefined })
       }
     "
@@ -92,7 +96,7 @@ const onSubmit = form.handleSubmit((values) => {
       </DialogHeader>
 
       <form @submit="onSubmit">
-        <div class="grid gap-4 mb-4">
+        <div class="grid gap-4 mb-8">
           <FormField v-slot="{ componentField }" name="note">
             <FormItem>
               <FormLabel class="text-slate-700">Note</FormLabel>
@@ -128,6 +132,21 @@ const onSubmit = form.handleSubmit((values) => {
               <FormMessage />
             </FormItem>
           </FormField>
+        </div>
+
+        <div v-if="route.query.id" class="flex gap-2 mb-4">
+          <Button
+            v-for="c in COLORS"
+            :key="c"
+            type="button"
+            size="icon-sm"
+            :class="
+              cn(c, {
+                'border-2 border-slate-500': color ? color === c : note.color === c
+              })
+            "
+            @click="setColor(c)"
+          ></Button>
         </div>
 
         <div class="flex justify-end">

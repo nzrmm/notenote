@@ -8,14 +8,10 @@ export interface NoteType {
   isFavorite: boolean
 }
 
-export interface NoteColor {
-  name: string
-  color: string
-}
-
 export interface NoteStateType {
   note: any
   notes: Ref<NoteType[]>
-  noteFormModal: { color: string; isOpen: boolean }
+  color: string
+  isOpenFormModal: boolean
   isViewSelectColor: boolean
 }

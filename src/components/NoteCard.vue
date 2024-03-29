@@ -11,7 +11,7 @@ import { useNoteStore } from '@/stores/note'
 
 const router = useRouter()
 const noteStore = useNoteStore()
-const { setNoteFormModal, updateIsFavoriteNote } = noteStore
+const { setColor, setOpenFormModal, updateIsFavoriteNote } = noteStore
 
 interface Props {
   data: NoteType
@@ -41,10 +41,7 @@ const { data } = defineProps<Props>()
         <Button
           size="icon-lg"
           @click="
-            () => {
-              setNoteFormModal(data.color, true)
-              router.replace({ query: { id: data.id } })
-            }
+            setColor(data.color), setOpenFormModal(true), router.replace({ query: { id: data.id } })
           "
         >
           <PencilLine fill="#FFF" width="18" />
