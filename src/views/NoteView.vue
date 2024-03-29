@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { NoteCard } from '@/components'
+import { NoteCard, NoteFormModal, NoteShowModal } from '@/components'
 
 import { useNoteStore } from '@/stores/note'
 
@@ -24,4 +24,7 @@ const { notes } = storeToRefs(noteStore)
   >
     <NoteCard v-for="note in notes" :key="note.id" :data="note" />
   </div>
+
+  <NoteFormModal />
+  <NoteShowModal />
 </template>

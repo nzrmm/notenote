@@ -41,7 +41,10 @@ watch(
       }
     "
   >
-    <DialogContent :class="cn('w-[88%] sm:max-w-80 flex flex-col justify-between', note.color)">
+    <DialogContent
+      v-if="note.note && note.date"
+      :class="cn('w-[88%] sm:max-w-80 flex flex-col justify-between', note.color)"
+    >
       <DialogHeader class="hidden">
         <DialogTitle></DialogTitle>
         <DialogDescription></DialogDescription>

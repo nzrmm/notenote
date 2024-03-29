@@ -2,7 +2,6 @@
 import { storeToRefs } from 'pinia'
 import { Plus } from 'lucide-vue-next'
 
-import { NoteFormModal } from '@/components'
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
@@ -36,8 +35,6 @@ const { setColor, setOpenFormModal, setViewSelectColor } = noteStore
           @click="setOpenFormModal(true), setColor(color)"
         ></Button>
       </div>
-
-      <NoteFormModal />
     </div>
   </aside>
 </template>

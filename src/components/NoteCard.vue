@@ -3,7 +3,6 @@ import { useRouter } from 'vue-router'
 import { format, parseISO } from 'date-fns'
 import { PencilLine, Star } from 'lucide-vue-next'
 
-import { NoteShowModal } from '@/components'
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
@@ -55,6 +54,4 @@ const { data } = defineProps<Props>()
       </div>
     </div>
   </div>
-
-  <NoteShowModal />
 </template>
