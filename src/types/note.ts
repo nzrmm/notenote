@@ -14,6 +14,7 @@ export interface NoteColor {
 }
 
 export interface NoteStateType {
+  note: any
   notes: Ref<NoteType[]>
   noteFormModal: { color: string; isOpen: boolean }
   isViewSelectColor: boolean

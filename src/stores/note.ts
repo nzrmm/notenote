@@ -7,6 +7,7 @@ import type { NoteStateType, NoteType } from '@/types/note'
 export const useNoteStore = defineStore('note', {
   state: (): NoteStateType => {
     return {
+      note: {},
       notes: useLocalStorage('notes', []),
       noteFormModal: {
         isOpen: false,
@@ -16,12 +17,19 @@ export const useNoteStore = defineStore('note', {
     }
   },
   actions: {
+    getNoteById(id: string) {
+      this.note = this.notes.find((note) => note.id === id)
+    },
     createNote(note: Omit<NoteType, 'id' | 'isFavorite'>) {
       this.notes.push({
         ...note,
         id: uuidv4(),
         isFavorite: false
       })
+    },
+    editNote(id: string, note: NoteType) {
+      const index = this.notes.findIndex((note) => note.id === id)
+      this.notes[index] = note
     },
     updateIsFavoriteNote(id: string, isFavorite: boolean) {
       const index = this.notes.findIndex((note) => note.id === id)

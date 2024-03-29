@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { format, parseISO } from 'date-fns'
 import { PencilLine, Star } from 'lucide-vue-next'
 
@@ -8,8 +9,9 @@ import { cn } from '@/lib/utils'
 import type { NoteType } from '@/types/note'
 import { useNoteStore } from '@/stores/note'
 
+const router = useRouter()
 const noteStore = useNoteStore()
-const { updateIsFavoriteNote } = noteStore
+const { setNoteFormModal, updateIsFavoriteNote } = noteStore
 
 interface Props {
   data: NoteType
@@ -21,7 +23,7 @@ const { data } = defineProps<Props>()
 <template>
   <div :class="cn('h-56 flex flex-col justify-between rounded-lg p-4', data.color)">
     <div class="flex justify-between">
-      <p>{{ data.note }}</p>
+      <p class="line-clamp-5">{{ data.note }}</p>
       <div>
         <Button size="icon-md" @click="updateIsFavoriteNote(data.id, !data.isFavorite)">
           <Star
@@ -36,7 +38,15 @@ const { data } = defineProps<Props>()
     <div class="flex justify-between items-center">
       <time :dateTime="data.date">{{ format(parseISO(data.date), 'PPP') }}</time>
       <div>
-        <Button size="icon-lg" @click="() => {}">
+        <Button
+          size="icon-lg"
+          @click="
+            () => {
+              setNoteFormModal(data.color, true)
+              router.replace({ query: { id: data.id } })
+            }
+          "
+        >
           <PencilLine fill="#FFF" width="18" />
         </Button>
       </div>
