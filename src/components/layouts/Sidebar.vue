@@ -21,7 +21,7 @@ const { setColor, setOpenFormModal, setViewSelectColor } = noteStore
 
       <Button
         size="icon"
-        :class="cn('mb-12 transition-all duration-300', { 'rotate-45': isViewSelectColor })"
+        :class="cn('mb-10 transition-all duration-300', { 'rotate-45': isViewSelectColor })"
         @click="setViewSelectColor(!isViewSelectColor)"
       >
         <Plus width="20" />

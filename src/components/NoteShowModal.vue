@@ -56,7 +56,7 @@ watch(
         <div>
           <Button size="icon-md" @click="updateIsFavoriteNote(note.id, !note.isFavorite)">
             <Star
-              width="14"
+              width="12"
               :fill="note.isFavorite ? '#F3CB51' : '#FFF'"
               :color="note.isFavorite ? '#F3CB51' : '#FFF'"
             />

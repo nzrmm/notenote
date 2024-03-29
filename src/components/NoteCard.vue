@@ -33,7 +33,7 @@ const { data } = defineProps<Props>()
       <div>
         <Button size="icon-md" @click="updateIsFavoriteNote(data.id, !data.isFavorite)">
           <Star
-            width="14"
+            width="12"
             :fill="data.isFavorite ? '#F3CB51' : '#FFF'"
             :color="data.isFavorite ? '#F3CB51' : '#FFF'"
           />
@@ -50,7 +50,7 @@ const { data } = defineProps<Props>()
             setColor(data.color), setOpenFormModal(true), router.replace({ query: { id: data.id } })
           "
         >
-          <PencilLine fill="#FFF" width="18" />
+          <PencilLine fill="#FFF" width="14" />
         </Button>
       </div>
     </div>
