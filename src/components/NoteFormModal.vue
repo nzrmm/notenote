@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import { format } from 'date-fns'
 import { storeToRefs } from 'pinia'
 import { useForm } from 'vee-validate'
+import { format, parseISO } from 'date-fns'
 import { toTypedSchema } from '@vee-validate/zod'
 import { Calendar as CalendarIcon } from 'lucide-vue-next'
 
@@ -41,7 +41,7 @@ const onSubmit = form.handleSubmit((values) => {
   createNote({
     ...values,
     color: noteFormModal.value.color,
-    date: format(values.date, 'PPP')
+    date: new Date(values.date).toISOString()
   })
 
   setNoteFormModal('', false)

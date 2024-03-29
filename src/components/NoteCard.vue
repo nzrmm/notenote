@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { format, parseISO } from 'date-fns'
 import { PencilLine, Star } from 'lucide-vue-next'
 
 import { Button } from '@/components/ui/button'
@@ -33,7 +34,7 @@ const { data } = defineProps<Props>()
     </div>
 
     <div class="flex justify-between items-center">
-      <time :dateTime="data.date">{{ data.date }}</time>
+      <time :dateTime="data.date">{{ format(parseISO(data.date), 'PPP') }}</time>
       <div>
         <Button size="icon-lg" @click="() => {}">
           <PencilLine fill="#FFF" width="18" />
