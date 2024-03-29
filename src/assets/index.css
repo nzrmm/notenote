@@ -78,7 +78,7 @@
     @apply bg-background text-foreground;
   }
   :is(span, time) {
-    @apply text-sm text-slate-500 dark:text-slate-200;
+    @apply text-sm text-slate-700 dark:text-slate-400;
     @apply leading-relaxed;
   }
   h1 {
@@ -92,6 +92,6 @@
 
 @layer utilities {
   .content-container {
-    @apply p-8 md:px-12 lg:px-20;
+    @apply px-8 md:px-12 lg:px-20;
   }
 }
