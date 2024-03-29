@@ -30,6 +30,9 @@ export const useNoteStore = defineStore('note', {
       const index = this.notes.findIndex((note) => note.id === id)
       this.notes[index] = note
     },
+    deleteNote(id: string) {
+      this.notes = this.notes.filter((note) => note.id !== id)
+    },
     updateIsFavoriteNote(id: string, isFavorite: boolean) {
       const index = this.notes.findIndex((note) => note.id === id)
       this.notes[index].isFavorite = isFavorite
