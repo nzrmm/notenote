@@ -92,7 +92,9 @@ const onSubmit = form.handleSubmit((values) => {
     <DialogContent class="w-[88%] sm:max-w-[425px]">
       <DialogHeader>
         <DialogTitle>{{ route.query.id ? 'Edit Note' : 'Create Note' }}</DialogTitle>
-        <DialogDescription> Create your daily note in here. Enjoy your day :) </DialogDescription>
+        <DialogDescription>
+          {{ route.query.id ? 'Edit' : 'Create' }} your daily note in here and enjoy your day 🙂
+        </DialogDescription>
       </DialogHeader>
 
       <form @submit="onSubmit">
