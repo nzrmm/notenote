@@ -11,6 +11,7 @@ export const useNoteStore = defineStore('note', {
       note: {},
       color: '',
       isOpenFormModal: false,
+      isOpenShowModal: false,
       isViewSelectColor: false
     }
   },
@@ -33,11 +34,14 @@ export const useNoteStore = defineStore('note', {
       const index = this.notes.findIndex((note) => note.id === id)
       this.notes[index].isFavorite = isFavorite
     },
+    setColor(value: string) {
+      this.color = value
+    },
     setOpenFormModal(value: boolean) {
       this.isOpenFormModal = value
     },
-    setColor(value: string) {
-      this.color = value
+    setOpenShowModal(value: boolean) {
+      this.isOpenShowModal = value
     },
     setViewSelectColor(value: boolean) {
       this.isViewSelectColor = value

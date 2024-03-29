@@ -3,6 +3,7 @@ import { useRouter } from 'vue-router'
 import { format, parseISO } from 'date-fns'
 import { PencilLine, Star } from 'lucide-vue-next'
 
+import { NoteShowModal } from '@/components'
 import { Button } from '@/components/ui/button'
 
 import { cn } from '@/lib/utils'
@@ -11,7 +12,7 @@ import { useNoteStore } from '@/stores/note'
 
 const router = useRouter()
 const noteStore = useNoteStore()
-const { setColor, setOpenFormModal, updateIsFavoriteNote } = noteStore
+const { setColor, setOpenFormModal, setOpenShowModal, updateIsFavoriteNote } = noteStore
 
 interface Props {
   data: NoteType
@@ -23,7 +24,12 @@ const { data } = defineProps<Props>()
 <template>
   <div :class="cn('h-56 flex flex-col justify-between rounded-lg p-4', data.color)">
     <div class="flex justify-between">
-      <p class="line-clamp-5">{{ data.note }}</p>
+      <div
+        class="cursor-pointer"
+        @click="setOpenShowModal(true), router.replace({ query: { id: data.id } })"
+      >
+        <p class="line-clamp-5">{{ data.note }}</p>
+      </div>
       <div>
         <Button size="icon-md" @click="updateIsFavoriteNote(data.id, !data.isFavorite)">
           <Star
@@ -49,4 +55,6 @@ const { data } = defineProps<Props>()
       </div>
     </div>
   </div>
+
+  <NoteShowModal />
 </template>
